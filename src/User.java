@@ -3,7 +3,9 @@ import java.util.Objects;
 public abstract class User {
     protected String fullName;
     protected String userName;
+    protected String password;
     protected Address address;
+    protected boolean signedUp;
     protected int ssn;
     protected static int userId = 0;
 
@@ -23,8 +25,23 @@ public abstract class User {
         this.ssn = ssn;
     }
 
+    abstract void signUp();
+
+    abstract void login();
+
+
+    public boolean IsSignedUp() {
+        if(fullName != null && userName != null && ssn != 0 && address != null)
+            return true;
+        else
+            return false;
+    }
+
     // getters
 
+    public boolean getSignedUp(){
+        return signedUp;
+    }
     public String getFullName() {
         return fullName;
     }
@@ -79,7 +96,7 @@ public abstract class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(ssn, fullName,userName, userId,address);
+        return Objects.hash(ssn, fullName, userName, userId, address);
 
     }
 }
