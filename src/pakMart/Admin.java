@@ -1,5 +1,7 @@
 package pakMart;
 
+import java.util.Objects;
+
 public class Admin extends User {
     private String adminId;
     private String post;
@@ -14,6 +16,18 @@ public class Admin extends User {
         this.adminId = "A" + (++adminCount);
     }
 
+    // used to intialize a completly new admin
+    public Admin(String fullName, String userName,
+                 Address address, int ssn,
+                 String post, double salary) {
+        super(fullName, userName, address, ssn);
+        this.adminId = adminId;
+        this.post = post;
+        this.salary = salary;
+        this.adminId = "A" + (++adminCount);
+    }
+
+    // used to intialize admin with already assigned id
     public Admin(String fullName, String userName,
                  Address address, int ssn, String adminId,
                  String post, double salary) {
@@ -21,7 +35,6 @@ public class Admin extends User {
         this.adminId = adminId;
         this.post = post;
         this.salary = salary;
-        this.adminId = "A" + (++adminCount);
     }
 
     @Override
@@ -113,18 +126,16 @@ public class Admin extends User {
 
     @Override
     public void login(String username, String password) {
-        if (!super.isSignedUp()) {
-            if(username.equals(userName) && password.equals(this.password)) {
-                Admin loadedAdmin = FileManager.loadAdmin();
-                this.copyObject(loadedAdmin);
-            }else {
-                System.out.printf(
-                        Color.Red()+ "Wrong %s\n"+Color.Reset(),
-                        this.password==password? "username": "password");
-            }
+
+        // At this point the current object doesn't have loaded data
+
+        Admin loadedAdmin = FileManager.loadAdmin(username, password);
+        if (username.equals(userName) && password.equals(this.password)) {
+            this.copyObject(loadedAdmin);
         } else {
-            System.out.println("User is not signed Up, please signup.");
+            System.out.printf(
+                    Color.Red() + "Wrong %s\n" + Color.Reset(),
+                    password.equals(this.password) ? "username" : "password");
         }
     }
-
 }

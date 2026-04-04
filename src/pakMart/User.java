@@ -65,6 +65,12 @@ public abstract class User {
 
     // getters and setters
 
+
+    public void setSignedUp(boolean signedUp) {
+        this.signedUp = signedUp;
+    }
+
+
     public boolean getSignedUp() {
         return signedUp;
     }
