@@ -1,5 +1,5 @@
-public class Color {
-    public static void Red() {
+public final class Color {
+    public static String Red() {
         System.out.print("\033[0;31m");
     }
 

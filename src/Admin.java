@@ -93,7 +93,7 @@ public class Admin extends User {
         this.adminId = "A" + (++adminCount);
         this.signedUp = true;
 
-        System.out.println("\nSignup Successful!");
+        System.out.println(Color.Green()+"\nSignup Successful!"+Color.Reset());
         System.out.println("Admin ID: " + adminId);
     }
 }
