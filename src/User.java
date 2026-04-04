@@ -1,4 +1,5 @@
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public abstract class User {
     protected String fullName;
@@ -7,13 +8,11 @@ public abstract class User {
     protected Address address;
     protected boolean signedUp;
     protected int ssn;
-    protected static int userId = 0;
 
     User() {
         fullName = null;
         userName = null;
         ssn = 0;
-        userId++;
     }
 
     // Note: Make sure that address recieved from the main class isnt null.
@@ -37,7 +36,22 @@ public abstract class User {
             return false;
     }
 
-    // getters
+    // Method to validate SSN format
+    protected boolean isValidSSN(String ssn) {
+        // SSN format: XXX-XX-XXXX where X is a digit
+        String ssnPattern = "^\\d{3}-\\d{2}-\\d{4}$";
+        return Pattern.matches(ssnPattern, ssn);
+    }
+
+    // Method to convert formatted SSN string to integer
+    protected int convertSSNToInt(String ssn) {
+        // Remove hyphens and parse to integer
+        String numbersOnly = ssn.replaceAll("-", "");
+        return Integer.parseInt(numbersOnly);
+    }
+
+
+    // getters and setters
 
     public boolean getSignedUp(){
         return signedUp;
@@ -62,20 +76,9 @@ public abstract class User {
         return address;
     }
 
-    // setters
-
     public void setAddress(Address address) {
         this.address = address;
     }
-
-    public static int getUserId() {
-        return userId;
-    }
-
-    public static void setUserId(int userId) {
-        User.userId = userId;
-    }
-
     public int getSsn() {
         return ssn;
     }
@@ -91,12 +94,14 @@ public abstract class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
 
-        return getSsn() == user.getSsn() && Objects.equals(getFullName(), user.getFullName()) && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getAddress(), user.getAddress());
+        return getSsn() == user.getSsn() && Objects.equals(getFullName(),
+                user.getFullName()) && Objects.equals(getUserName(),
+                user.getUserName()) && Objects.equals(getAddress(), user.getAddress());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ssn, fullName, userName, userId, address);
+        return Objects.hash(ssn, fullName, userName, address);
 
     }
 }
