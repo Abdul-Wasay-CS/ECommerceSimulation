@@ -1,3 +1,5 @@
+package pakMart;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -26,11 +28,21 @@ public abstract class User {
 
     abstract void signUp();
 
-    abstract void login();
+    abstract void login(String username, String password);
 
+    protected void copyObject(User other) {
+        if (other != null) {
+            this.fullName = other.fullName;
+            this.userName = other.userName;
+            this.password = other.password;
+            this.address = other.address != null ? new Address(other.address) : null;
+            this.signedUp = other.signedUp;
+            this.ssn = other.ssn;
+        }
+    }
 
-    public boolean IsSignedUp() {
-        if(fullName != null && userName != null && ssn != 0 && address != null)
+    public boolean isSignedUp() {
+        if (fullName != null && userName != null && ssn != 0 && address != null)
             return true;
         else
             return false;
@@ -53,9 +65,10 @@ public abstract class User {
 
     // getters and setters
 
-    public boolean getSignedUp(){
+    public boolean getSignedUp() {
         return signedUp;
     }
+
     public String getFullName() {
         return fullName;
     }
@@ -79,6 +92,7 @@ public abstract class User {
     public void setAddress(Address address) {
         this.address = address;
     }
+
     public int getSsn() {
         return ssn;
     }

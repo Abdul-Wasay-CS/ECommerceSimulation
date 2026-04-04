@@ -1,3 +1,5 @@
+package pakMart;
+
 public final class Color {
     public static String Red() {
         return "\033[0;31m";

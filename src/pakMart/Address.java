@@ -1,3 +1,5 @@
+package pakMart;
+
 import java.util.Objects;
 
 public class Address {
@@ -74,7 +76,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
+        return "pakMart.Address{" +
                 "country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", society='" + society + '\'' +

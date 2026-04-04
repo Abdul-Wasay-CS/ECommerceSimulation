@@ -1,3 +1,5 @@
+package pakMart;
+
 public class Admin extends User {
     private String adminId;
     private String post;
@@ -20,6 +22,17 @@ public class Admin extends User {
         this.post = post;
         this.salary = salary;
         this.adminId = "A" + (++adminCount);
+    }
+
+    @Override
+    protected void copyObject(User other) {
+        super.copyObject(other);
+        if (other instanceof Admin) {
+            Admin adminOther = (Admin) other;
+            this.adminId = adminOther.adminId;
+            this.post = adminOther.post;
+            this.salary = adminOther.salary;
+        }
     }
 
     // signup
@@ -51,7 +64,7 @@ public class Admin extends User {
             this.password = SafeInputs.getString();
         }
 
-        // Address
+        // pakMart.Address
         Address addr = new Address();
         System.out.print("Enter Country: ");
         addr.setCountry(SafeInputs.getString());
@@ -74,7 +87,7 @@ public class Admin extends User {
         }
         this.ssn = convertSSNToInt(ssnInput);
 
-        // Admin specific
+        // pakMart.Admin specific
         System.out.print("Enter Post/Position: ");
         this.post = SafeInputs.getString();
         while (this.post.isBlank()) {
@@ -93,14 +106,25 @@ public class Admin extends User {
         this.adminId = "A" + (++adminCount);
         this.signedUp = true;
 
-        System.out.println(Color.Green()+"\nSignup Successful!"+Color.Reset());
-        System.out.println("Admin ID: " + adminId);
+        System.out.println(Color.Green() + "\nSignup Successful!" + Color.Reset());
+        System.out.println("pakMart.Admin ID: " + adminId);
     }
-}
 
-@Override
-public void login() {
 
-}
+    @Override
+    public void login(String username, String password) {
+        if (!super.isSignedUp()) {
+            if(username.equals(userName) && password.equals(this.password)) {
+                Admin loadedAdmin = FileManager.loadAdmin();
+                this.copyObject(loadedAdmin);
+            }else {
+                System.out.printf(
+                        Color.Red()+ "Wrong %s\n"+Color.Reset(),
+                        this.password==password? "username": "password");
+            }
+        } else {
+            System.out.println("User is not signed Up, please signup.");
+        }
+    }
 
 }
