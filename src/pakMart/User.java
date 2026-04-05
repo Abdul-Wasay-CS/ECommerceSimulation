@@ -17,7 +17,7 @@ public abstract class User {
         ssn = 0;
     }
 
-    // Note: Make sure that address recieved from the main class isnt null.
+    // Note: Make sure that address received from the main class isn't null.
 
     User(String fullName, String userName, Address address, int ssn) {
         this.fullName = fullName;
@@ -26,7 +26,6 @@ public abstract class User {
         this.ssn = ssn;
     }
 
-    abstract void signUp();
 
     abstract void login(String username, String password);
 
@@ -41,11 +40,8 @@ public abstract class User {
         }
     }
 
-    public boolean isSignedUp() {
-        if (fullName != null && userName != null && ssn != 0 && address != null)
-            return true;
-        else
-            return false;
+    public boolean  isSignedUp() {
+        return fullName != null && userName != null && ssn != 0 && address != null;
     }
 
     // Method to validate SSN format
@@ -105,6 +101,10 @@ public abstract class User {
 
     public void setSsn(int ssn) {
         this.ssn = ssn;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

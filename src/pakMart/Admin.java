@@ -1,6 +1,5 @@
 package pakMart;
 
-import java.util.Objects;
 
 public class Admin extends User {
     private String adminId;
@@ -21,7 +20,6 @@ public class Admin extends User {
                  Address address, int ssn,
                  String post, double salary) {
         super(fullName, userName, address, ssn);
-        this.adminId = adminId;
         this.post = post;
         this.salary = salary;
         this.adminId = "A" + (++adminCount);
@@ -40,17 +38,19 @@ public class Admin extends User {
     @Override
     protected void copyObject(User other) {
         super.copyObject(other);
-        if (other instanceof Admin) {
-            Admin adminOther = (Admin) other;
+        if (other instanceof Admin adminOther) {
             this.adminId = adminOther.adminId;
             this.post = adminOther.post;
             this.salary = adminOther.salary;
         }
     }
 
-    // signup
-    @Override
-    void signUp() {
+    public void signUp() {
+        if (super.getSignedUp()) {
+            System.out.println("You are already signed up.");
+            return;
+        }
+
         System.out.println("\n=== ADMIN SIGNUP ===");
 
         // Full Name
@@ -128,14 +128,29 @@ public class Admin extends User {
     public void login(String username, String password) {
 
         // At this point the current object doesn't have loaded data
-
         Admin loadedAdmin = FileManager.loadAdmin(username, password);
-        if (username.equals(userName) && password.equals(this.password)) {
-            this.copyObject(loadedAdmin);
+
+        if (loadedAdmin != null) {
+            if (username.equals(loadedAdmin.getUserName()) && password.equals(loadedAdmin.getPassword())) {
+                this.copyObject(loadedAdmin);
+            } else {
+                System.out.printf(
+                        Color.Red() + "Wrong %s\n" + Color.Reset(),
+                        password.equals(this.password) ? "username" : "password");
+            }
         } else {
-            System.out.printf(
-                    Color.Red() + "Wrong %s\n" + Color.Reset(),
-                    password.equals(this.password) ? "username" : "password");
+            System.out.println("Login failed, Admin not found.");
+        }
+    }
+
+    public static boolean exists(String username, String password) {
+        if(FileManager.findAdmin(username,password)){
+            System.out.println("Admin found!");
+            return true;
+        }
+        else{
+            System.out.println("Admin doesnt exist");
+            return false;
         }
     }
 }
