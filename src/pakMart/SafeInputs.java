@@ -11,7 +11,7 @@ abstract public class SafeInputs {
         input.useDelimiter("\\R");
     }
 
-    static int getInt() {
+    public static int getInt() {
         while (true) {
             try {
                 return input.nextInt();    // breaks the loop if there is no exception in line 10
@@ -21,7 +21,7 @@ abstract public class SafeInputs {
         }
     }
 
-    static double getDouble() {
+    public static double getDouble() {
         while (true) {
             try {
                 return input.nextDouble();
@@ -31,7 +31,7 @@ abstract public class SafeInputs {
         }
     }
 
-    static String getString() {
+    public static String getString() {
         while (true) {
             try {
                 return input.nextLine();
@@ -41,7 +41,7 @@ abstract public class SafeInputs {
         }
     }
 
-    static boolean getBoolean(){
+    public static boolean getBoolean(){
         while(true){
             try{
                 return input.nextBoolean();

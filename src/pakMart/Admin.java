@@ -1,6 +1,8 @@
 package pakMart;
 
 
+import java.util.Objects;
+
 public class Admin extends User {
     private String adminId;
     private String post;
@@ -33,6 +35,20 @@ public class Admin extends User {
         this.adminId = adminId;
         this.post = post;
         this.salary = salary;
+    }
+
+    @Override
+    public void menu() {
+        System.out.println(Color.Cyan() + "=".repeat(20)
+                + Color.Reset() + Color.Green() + "Admin Menu" + Color.Reset() + Color.Cyan() + "=".repeat(20) + Color.Reset());
+        System.out.println("""
+                1.  Add new product 
+                2.  Remove a product
+                3.  Edit a product
+                4.  View all products
+                5.  View all customers
+                6.    
+                """);
     }
 
     @Override
@@ -143,14 +159,69 @@ public class Admin extends User {
         }
     }
 
+
+    // setters and getters
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Admin admin)) return false;
+        if (!super.equals(o)) return false;
+        return Double.compare(getSalary(), admin.getSalary()) == 0 && Objects.equals(getAdminId(), admin.getAdminId()) && Objects.equals(getPost(), admin.getPost());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getAdminId(), getPost(), getSalary());
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "adminId='" + adminId + '\'' +
+                ", post='" + post + '\'' +
+                ", salary=" + salary +
+                ", fullName='" + fullName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", address=" + address +
+                ", password='" + password + '\'' +
+                ", signedUp=" + signedUp +
+                ", ssn=" + ssn +
+                '}';
+    }
+
     public static boolean exists(String username, String password) {
-        if(FileManager.findAdmin(username,password)){
+        if (FileManager.findAdmin(username, password)) {
             System.out.println("Admin found!");
             return true;
-        }
-        else{
+        } else {
             System.out.println("Admin doesnt exist");
             return false;
         }
+
+
     }
 }

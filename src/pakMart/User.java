@@ -28,7 +28,7 @@ public abstract class User {
 
 
     abstract void login(String username, String password);
-
+    abstract void menu();
     protected void copyObject(User other) {
         if (other != null) {
             this.fullName = other.fullName;
