@@ -21,7 +21,8 @@ public final class FileManager {
     private static final int SALARY_INDEX = 12;
 
 
-    // Admin related methods
+//==================    Admin related methods   ==================
+
     static Admin loadAdmin(String username, String password) {
         String path = "data" + File.separator + "adminData.csv";
         String line;
@@ -165,10 +166,31 @@ public final class FileManager {
         return false;   // default return value if object is not an Admin or if an error occurs
     }
 
+    static void viewAllAdmins() {
+        
 
-    // customer related methods (to be implemented)
+        String path = "data" + File.separator + "adminData.csv";
+        String line;
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            System.out.println("Admins List:");
+            System.out.println("---------------------------------------------");
+            System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", "Admin ID", "Full Name", "Username", "Post", "Salary");
 
-    // TODO: placeholder for outputing all customers (for admin menu)
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                System.out.printf("%-10s %-20s %-15s %-10s %-20s%n"
+                                    , values[ID_INDEX], values[FULLNAME_INDEX], values[USERNAME_INDEX]
+                                    , values[POST_INDEX], values[SALARY_INDEX]);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the file: " + e);
+        }
+    }
 
-    // TODO: placeholder for outputing all products (for admin menu)
+
+//============  customer related methods (to be implemented)  ==============
+
+    //  TODO: placeholder for outputing all customers (for admin menu) 
+
+    // TODO: placeholder for outputing all products (for admin menu) 
 }
