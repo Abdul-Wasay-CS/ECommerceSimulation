@@ -13,7 +13,7 @@ public class Address {
 
     }
 
-    Address(String country, String city, String society, int streetNo, int houseNo){
+  public Address(String country, String city, String society, int streetNo, int houseNo){
         this.country = country;
         this.city = city;
         this.society = society;
@@ -21,7 +21,7 @@ public class Address {
         this.houseNo = houseNo;
     }
 
-    Address(Address copiedAddress){
+  public Address(Address copiedAddress){
         this.country = copiedAddress.getCountry();
         this.city = copiedAddress.getCity();
         this.society = copiedAddress.getSociety();
