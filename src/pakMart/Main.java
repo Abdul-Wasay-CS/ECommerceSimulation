@@ -77,6 +77,7 @@ public class Main {
                 break;
             }
             default: {
+		System.out.print(Color.Red()+"Invalid Choice"+Color.Reset());
                 break;
             }
         }
