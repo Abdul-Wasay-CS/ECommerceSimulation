@@ -77,6 +77,7 @@ public class Main {
                 break;
             }
             default: {
+		System.out.pringt(Color.Red()+"Not valid"+Color.Reset());
                 break;
             }
         }
