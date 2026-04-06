@@ -24,7 +24,7 @@ public final class FileManager {
 //==================    Admin related methods   ==================
 
     static Admin loadAdmin(String username, String password) {
-        String path = "data" + File.separator + "adminData.csv";
+        String path = "data" + File.separator + "adminData.csv"; 
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             while ((line = br.readLine()) != null) {
@@ -167,7 +167,6 @@ public final class FileManager {
     }
 
     static void viewAllAdmins() {
-        
 
         String path = "data" + File.separator + "adminData.csv";
         String line;

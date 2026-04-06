@@ -3,9 +3,10 @@ package pakMart;
 import java.util.Objects;
 
 public class Admin extends User {
-    private String adminId;
+    private String adminId; 
     private String post;
     private double salary;
+
 
     // adminId format = "A" + adminCount;
     private static int adminCount = 0;
