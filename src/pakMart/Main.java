@@ -77,7 +77,11 @@ public class Main {
                 break;
             }
             default: {
-		System.out.pringt(Color.Red()+"Not valid"+Color.Reset());
+<<<<<<< HEAD
+		System.out.pringt(Color.Red()+"Invalid Choice"+Color.Reset());
+=======
+		System.out.print(Color.Red()+"Invalid Choice"+Color.Reset());
+>>>>>>> Making-Main-Class
                 break;
             }
         }
