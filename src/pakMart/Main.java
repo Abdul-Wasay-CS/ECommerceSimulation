@@ -78,10 +78,13 @@ public class Main {
             }
             default: {
 <<<<<<< HEAD
-		System.out.pringt(Color.Red()+"Invalid Choice"+Color.Reset());
+<<<<<<< HEAD
+		System.out.print(Color.Red()+"Invalid Choice"+Color.Reset());
 =======
 		System.out.print(Color.Red()+"Invalid Choice"+Color.Reset());
 >>>>>>> Making-Main-Class
+=======
+		System.out.print("Invalid Choice");>>>>>>> Making-Main-Class
                 break;
             }
         }
