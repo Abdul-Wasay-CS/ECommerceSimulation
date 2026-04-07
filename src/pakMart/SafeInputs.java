@@ -10,7 +10,7 @@ abstract public class SafeInputs {
     public static int getInt() {
         while (true) {
             try {
-                int input.nextInt();    // breaks the loop if there is no exception in line 10
+                return input.nextInt();    // breaks the loop if there is no exception in line 10
             } catch (InputMismatchException e) {
                 System.out.println("Please enter an integer only");
                 input.nextLine();

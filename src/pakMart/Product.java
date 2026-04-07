@@ -3,8 +3,9 @@ package pakMart;
 import java.io.File;
 import java.util.Scanner;
 
-public class Product {
+// import java.util.Objects;
 
+class Product {
     private int productId;
     private String name;
     private double price;
@@ -22,6 +23,61 @@ public class Product {
         this.name = name;
         this.price = price;
         this.stock = stock;
+    }
+
+    public static void displayProducts() {
+        try {
+            File products = new File("Products.txt");
+            Scanner reader = new Scanner(products);
+            Color.Cyan();
+            System.out.println("╔══════════════════════════════════════════════════════════════╗");
+            System.out.println("║                      Available Products                      ║");
+            System.out.println("╠══════════════════════════════════════════════════════════════╣");
+            System.out.println("║ Product ID │ Name                 │ Price      │ Stock       ║");
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] details = line.split(",");
+                System.out.printf("║ %-10s │ %-20s │ %-10.2f │ %-11d ║\n", details[0], details[1],
+                        Double.parseDouble(details[2]), Integer.parseInt(details[3]));
+            }
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
+            Color.Reset();
+            reader.close();
+        } catch (Exception e) {
+            Color.Red();
+            System.out.println("""
+                    ╔══════════════════════════════════════════════════════════════╗
+                    ║ An error occurred while reading the products file.           ║
+                    ║ Please try again later.                                      ║
+                    ╚══════════════════════════════════════════════════════════════╝
+                    """);
+        }
+    }
+
+    public static Product getProductById(String productId) {
+        try {
+            File products = new File("Products.txt");
+            Scanner reader = new Scanner(products);
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] details = line.split(",");
+                if (details[0].equals(productId)) {
+                    reader.close();
+                    return new Product(Integer.parseInt(details[0]), details[1], Double.parseDouble(details[2]),
+                            Integer.parseInt(details[3]));
+                }
+            }
+            reader.close();
+        } catch (Exception e) {
+            Color.Red();
+            System.out.println("""
+                    ╔══════════════════════════════════════════════════════════════╗
+                    ║ An error occurred while reading the products file.           ║
+                    ║ Please try again later.                                      ║
+                    ╚══════════════════════════════════════════════════════════════╝
+                    """);
+        }
+        return null;
     }
 
     public void display() {
@@ -94,44 +150,4 @@ public class Product {
                 ", Price: " + price +
                 ", Stock: " + stock;
     }
-
-    public static void displayProducts() {
-        try {
-            File products = new File("Products.txt");
-            Scanner reader = new Scanner(products);
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                String[] details = line.split(",");
-                System.out.println("Product ID: " + details[0] +
-                        ", Name: " + details[1] +
-                        ", Price: " + details[2] +
-                        ", Stock: " + details[3]);
-            }
-            reader.close();
-        } catch (Exception e) {
-            System.out.println("An error occurred while reading the file.");
-        }
-    }
-
-    public static Product getProductById(int productId) {
-        try {
-            File products = new File("Products.txt");
-            Scanner reader = new Scanner(products);
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                String[] details = line.split(",");
-                if (Integer.parseInt(details[0]) == productId) {
-                    reader.close();
-                    return new Product(Integer.parseInt(details[0]), details[1], Double.parseDouble(details[2]),
-                            Integer.parseInt(details[3]));
-                }
-            }
-            reader.close();
-        } catch (Exception e) {
-            System.out.println("An error occurred while reading the file.");
-        }
-        return null;
-    }
-
 }
-

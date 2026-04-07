@@ -38,39 +38,50 @@ public class Admin extends User {
 
     @Override
     public void menu() {
-        System.out.println(Color.Cyan() + "=".repeat(20)
-                + Color.Reset() + Color.Green() + "Admin Menu" + Color.Reset() + Color.Cyan() + "=".repeat(20)
-                + Color.Reset());
-        System.out.println(Color.Yellow() + """
+        while (true) {
+            System.out.println(Color.Cyan() + "=".repeat(20)
+                    + Color.Reset() + Color.Green() + "Admin Menu" + Color.Reset() + Color.Cyan() + "=".repeat(20)
+                    + Color.Reset());
+            System.out.println(Color.Yellow() + """
 
-                1.  Add new product \n
-                2.  Remove a product\n
-                3.  Edit a product\n
-                4.  View all products\n
-                5.  View all customers\n""" + Color.Reset());
-        System.out.println(Color.Cyan() + "=".repeat(40) + Color.Reset());
-        System.out.println("Enter your choice: ");
-        int choice = SafeInputs.getInt();
-        switch (choice) {
-            case (1): {
-                addProduct();
-                break;
-            }
-            case (2): {
-                removeProduct();
-                break;
-            }
-            case (3): {
-                editProduct();
-                break;
-            } 
-            case (4): {
-                viewAllProducts();
-                break;
-            }
-            case (5): {
-                viewAllCustomers();
-                break;
+                    1.  Add new product \n
+                    2.  Remove a product\n
+                    3.  Edit a product\n
+                    4.  View all products\n
+                    5.  View all customers\n
+                    6.  Logout\n""" + Color.Reset());
+            System.out.println(Color.Cyan() + "=".repeat(40) + Color.Reset());
+            System.out.println("Enter your choice: ");
+            int choice = SafeInputs.getInt();
+            switch (choice) {
+                case (1): {
+                    addProduct();
+                    break;
+                }
+                case (2): {
+                    removeProduct();
+                    break;
+                }
+                case (3): {
+                    editProduct();
+                    break;
+                }
+                case (4): {
+                    viewAllProducts();
+                    break;
+                }
+                case (5): {
+                    viewAllCustomers();
+                    break;
+                }
+                case (6): {
+                    System.out.println(Color.Green() + "Logged out successfully." + Color.Reset());
+                    return;
+                }
+                default: {
+                    System.out.println(Color.Red() + "Invalid choice" + Color.Reset());
+                    break;
+                }
             }
         }
     }
