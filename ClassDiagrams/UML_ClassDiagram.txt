@@ -1,0 +1,279 @@
+╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                       E-COMMERCE SIMULATION - UML CLASS DIAGRAM                                                                ║
+║                                                           Using Conventional UML Notation                                                                        ║
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                    <<abstract>> User                                                                             │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ # fullName: String                                                                                                                                               │
+│ # userName: String                                                                                                                                               │
+│ # password: String                                                                                                                                               │
+│ # address: Address                                                                                                                                               │
+│ # signedUp: boolean                                                                                                                                              │
+│ # ssn: int                                                                                                                                                       │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + User()                                                                                                                                                         │
+│ + User(fullName: String, userName: String, address: Address, ssn: int)                                                                                          │
+│ + login(username: String, password: String): void <<abstract>>                                                                                                  │
+│ + menu(): void <<abstract>>                                                                                                                                     │
+│ # copyObject(other: User): void                                                                                                                                 │
+│ + isSignedUp(): boolean                                                                                                                                         │
+│ # isValidSSN(ssn: String): boolean                                                                                                                              │
+│ # convertSSNToInt(ssn: String): int                                                                                                                             │
+│ + setSignedUp(signedUp: boolean): void                                                                                                                         │
+│ + getSignedUp(): boolean                                                                                                                                        │
+│ + getFullName(): String                                                                                                                                         │
+│ + setFullName(fullName: String): void                                                                                                                          │
+│ + getUserName(): String                                                                                                                                         │
+│ + setUserName(userName: String): void                                                                                                                          │
+│ + getAddress(): Address                                                                                                                                         │
+│ + setAddress(address: Address): void                                                                                                                           │
+│ + getSsn(): int                                                                                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+                                                                              ▲
+                                                                 ┌────────────┴─────────────┐
+                                                                 │                          │
+                                                                 │                          │
+
+
+┌──────────────────────────────────────────────────────────────────────┐    ┌──────────────────────────────────────────────────────────────────────┐
+│                           Admin                                      │    │                        Customer                                        │
+├──────────────────────────────────────────────────────────────────────┤    ├──────────────────────────────────────────────────────────────────────┤
+│ - adminId: String                                                    │    │ # phoneNumber: String                                                │
+│ - post: String                                                       │    │ # history: int                                                       │
+│ - salary: double                                                     │    ├──────────────────────────────────────────────────────────────────────┤
+│ - adminCount: int <<static>>                                         │    │ + Customer()                                                         │
+├──────────────────────────────────────────────────────────────────────┤    │ + Customer(customer: Customer)                                       │
+│ + Admin()                                                            │    │ + Customer(fullName: String, userName: String, address: Address,     │
+│ + Admin(fullName: String, userName: String, address: Address,       │    │             ssn: int, phoneNumber: String, history: int)            │
+│           ssn: int, post: String, salary: double)                   │    ├──────────────────────────────────────────────────────────────────────┤
+│ + Admin(fullName: String, userName: String, address: Address,       │    │ + login(userName: String, password: String): void <<override>>      │
+│           ssn: int, adminId: String, post: String, salary: double)  │    │ + menu(): void <<override>>                                          │
+├──────────────────────────────────────────────────────────────────────┤    │ + signUp(fullName: String, newUserName: String,                      │
+│ + menu(): void <<override>>                                          │    │           newPassword: String, country: String, city: String,       │
+│ - viewAllProducts(): void                                            │    │           society: String, streetNo: int, houseNo: int,             │
+│ - viewAllCustomers(): void                                           │    │           phoneNumber: String): void <<static>>                     │
+│ - addProduct(): void                                                 │    │ + getPhoneNumber(): String                                           │
+│ - removeProduct(): void                                              │    │ + setPhoneNumber(phoneNumber: String): void                          │
+│ - editProduct(): void                                                │    │ + getHistory(): int                                                  │
+│ + getAdminId(): String                                               │    │ + setHistory(history: int): void                                     │
+│ + setAdminId(adminId: String): void                                  │    └──────────────────────────────────────────────────────────────────────┘
+│ + getPost(): String                                                  │
+│ + setPost(post: String): void                                        │
+│ + getSalary(): double                                                │
+│ + setSalary(salary: double): void                                    │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                         <<abstract>> Cart                             │
+├──────────────────────────────────────────────────────────────────────┤
+│ # items: List<CartItem>                                              │
+├──────────────────────────────────────────────────────────────────────┤
+│ + Cart()                                                             │
+│ + getItems(): List<CartItem>                                         │
+│ + addItem(item: CartItem): void                                      │
+│ + removeItem(item: CartItem): void                                   │
+│ + clearCart(): void                                                  │
+│ + getTotalPrice(): double                                            │
+│ + displayCart(): void                                                │
+│ + removeItemByProductId(productId: int): void                        │
+│ + displayOrderDetails(): void <<abstract>>                           │
+│ + checkout(): void <<abstract>>                                      │
+└──────────────────────────────────────────────────────────────────────┘
+                            ▲
+                            │
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                           Order                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│ - orderId: int <<final>>                                             │
+│ - customerName: String                                               │
+│ - orderDate: Date                                                    │
+├──────────────────────────────────────────────────────────────────────┤
+│ + Order(customerName: String)                                        │
+│ - getOrderId(): int                                                  │
+│ + displayOrderDetails(): void <<override>>                           │
+│ + checkout(): void <<override>>                                      │
+│ - formatDate(): String                                               │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                         Product                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│ - productId: int                                                     │
+│ - name: String                                                       │
+│ - price: double                                                      │
+│ - stock: int                                                         │
+├──────────────────────────────────────────────────────────────────────┤
+│ + Product()                                                          │
+│ + Product(productId: int, name: String, price: double, stock: int)  │
+│ + displayProducts(): void <<static>>                                 │
+│ + getProductById(productId: String): Product <<static>>              │
+│ + display(): void                                                    │
+│ + updatePrice(price: double): void                                   │
+│ + reduceStock(quantity: int): boolean                                │
+│ + addStock(quantity: int): void                                      │
+│ + getTotalPrice(quantity: int): double                               │
+│ + getProductId(): int                                                │
+│ + setProductId(productId: int): void                                 │
+│ + getName(): String                                                  │
+│ + setName(name: String): void                                        │
+│ + getPrice(): double                                                 │
+│ + setPrice(price: double): void                                      │
+│ + getStock(): int                                                    │
+│ + setStock(stock: int): void                                         │
+│ + toString(): String <<override>>                                    │
+└──────────────────────────────────────────────────────────────────────┘
+                            ▲
+                            │
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                         Clothes                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│ - size: String                                                       │
+│ - brand: String                                                      │
+│ - stuff: String                                                      │
+│ - color: String                                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│ + Clothes()                                                          │
+│ + Clothes(productId: int, name: String, price: double, stock: int,  │
+│           size: String, brand: String, stuff: String, color: String)│
+│ + display(): void <<override>>                                       │
+│ + getSize(): String                                                  │
+│ + setSize(size: String): void                                        │
+│ + getBrand(): String                                                 │
+│ + setBrand(brand: String): void                                      │
+│ + getStuff(): String                                                 │
+│ + setStuff(stuff: String): void                                      │
+│ + getColor(): String                                                 │
+│ + setColor(color: String): void                                      │
+│ + toString(): String <<override>>                                    │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                        CartItem                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│ # product: Product                                                   │
+│ # quantity: int                                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│ + CartItem(product: Product, quantity: int)                          │
+│ + getProduct(): Product                                              │
+│ + getQuantity(): int                                                 │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                        Address                                       │
+├──────────────────────────────────────────────────────────────────────┤
+│ - country: String                                                    │
+│ - city: String                                                       │
+│ - society: String                                                    │
+│ - streetNo: int                                                      │
+│ - houseNo: int                                                       │
+├──────────────────────────────────────────────────────────────────────┤
+│ + Address()                                                          │
+│ + Address(country: String, city: String, society: String,           │
+│           streetNo: int, houseNo: int)                               │
+│ + Address(copiedAddress: Address)                                    │
+│ + getCountry(): String                                               │
+│ + setCountry(country: String): void                                  │
+│ + getCity(): String                                                  │
+│ + setCity(city: String): void                                        │
+│ + getSociety(): String                                               │
+│ + setSociety(society: String): void                                  │
+│ + getStreetNo(): int                                                 │
+│ + setStreetNo(streetNo: int): void                                   │
+│ + getHouseNo(): int                                                  │
+│ + setHouseNo(houseNo: int): void                                     │
+│ + toString(): String <<override>>                                    │
+│ + equals(o: Object): boolean <<override>>                            │
+│ + hashCode(): int <<override>>                                       │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                        <<final>> Color                               │
+├──────────────────────────────────────────────────────────────────────┤
+│ + Red(): String <<static>>                                           │
+│ + Green(): String <<static>>                                         │
+│ + Yellow(): String <<static>>                                        │
+│ + Blue(): String <<static>>                                          │
+│ + Purple(): String <<static>>                                        │
+│ + Cyan(): String <<static>>                                          │
+│ + White(): String <<static>>                                         │
+│ + Reset(): String <<static>>                                         │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                      <<final>> FileManager                           │
+├──────────────────────────────────────────────────────────────────────┤
+│ - ID_INDEX: int <<static final>>                                     │
+│ - FULLNAME_INDEX: int <<static final>>                               │
+│ - USERNAME_INDEX: int <<static final>>                               │
+│ - PASSWORD_INDEX: int <<static final>>                               │
+│ - COUNTRY_INDEX: int <<static final>>                                │
+│ - CITY_INDEX: int <<static final>>                                   │
+│ - SOCIETY_INDEX: int <<static final>>                                │
+│ - STREET_NO_INDEX: int <<static final>>                              │
+│ - HOUSE_NO_INDEX: int <<static final>>                               │
+│ - SSN_INDEX: int <<static final>>                                    │
+│ - SIGNED_UP_INDEX: int <<static final>>                              │
+│ - POST_INDEX: int <<static final>>                                   │
+│ - SALARY_INDEX: int <<static final>>                                 │
+├──────────────────────────────────────────────────────────────────────┤
+│ + loadAdmin(username: String, password: String): Admin <<static>>    │
+│ - getLoadingAdmin(values: String[]): Admin <<static>>                │
+│ + findAdmin(username: String, password: String): boolean <<static>>  │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                   <<abstract>> SafeInputs                            │
+├──────────────────────────────────────────────────────────────────────┤
+│ - input: Scanner <<static final>>                                    │
+├──────────────────────────────────────────────────────────────────────┤
+│ + getInt(): int <<static>>                                           │
+│ + getDouble(): double <<static>>                                     │
+│ + getString(): String <<static>>                                     │
+│ + getBoolean(): boolean <<static>>                                   │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                         Main                                         │
+├──────────────────────────────────────────────────────────────────────┤
+│ + main(args: String[]): void <<static>>                              │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+                                                            RELATIONSHIPS & ASSOCIATIONS
+
+
+  ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Admin is-a User (extends)          │  User has-a Address (composition)                                                             │
+  │ Customer is-a User (extends)       │  Cart has-many CartItem (composition)                                                         │
+  │ Order is-a Cart (extends)          │  CartItem has-a Product (association)                                                         │
+  │ Clothes is-a Product (extends)     │  Order has-many CartItem (through Cart)                                                       │
+  └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+                                                            UML NOTATION LEGEND
+
+
+  +  Public          Private         #  Protected         <<abstract>>  Abstract Class
+  -  Private         ~  Package       <<static>>           Static Member
+
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,163 @@
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                              E-COMMERCE SIMULATION - UML CLASS DIAGRAM                                      ┃
+┃                                  (Visual Format with Aggregation/Composition)                               ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+                                                    ╔════════════════╗
+                                                    ║      User      ║
+                                                    ║ <<abstract>>   ║
+                                                    ╠════════════════╣
+                                                    ║-name: String   ║
+                                                    ║-password: String
+                                                    ║-userName: String
+                                                    ║-email: String  ║
+                                                    ║-address: Address
+                                                    ║-signedUp: boolean
+                                                    ║-ssn: int       ║
+                                                    ╠════════════════╣
+                                                    ║+User()         ║
+                                                    ║+User(String, String,
+                                                    ║      int, String)
+                                                    ║+getNamedO):    ║
+                                                    ║+setName(): void ║
+                                                    ║+getPassword(): String
+                                                    ║+setPassword(): void
+                                                    ║+getPhoneNo():  ║
+                                                    ║+setPhoneNo(): void
+                                                    ║+getEmail():    ║
+                                                    ║+setEmail(): void
+                                                    ║+signUp():      ║
+                                                    ║+login(String, String):
+                                                    ╚════════════════╝
+                                                            △
+                                                            │
+                                          ┌─────────────────┼─────────────────┐
+                                          │                 │                 │
+                                         ◇                  │                 ◇
+                                        ╱ ╲                │                ╱ ╲
+                              ╔════════════════╗      ╔════════════════╗     (Composition)
+                              ║   Customer     ║      ║     Admin      ║
+                              ╠════════════════╣      ╠════════════════╣
+                              ║-customerID: int║      ║-adminID: int   ║
+                              ║-address: String║      ║-post: String   ║
+                              ║-cart: Cart     ║      ║                ║
+                              ╠════════════════╣      ╠════════════════╣
+                              ║+signup(): void ║      ║+addProduct(p: Product)
+                              ║+viewProducts():void  ║+removeProduct(id:int)
+                              ║+addToCart(p: Product)║+updateProduct(p:Product)
+                              ║+placeOrder(): Order  ║+addDiscount(): void
+                              ╚════════════════╝      ║+manageSale(): void
+                                      │               ╚════════════════╝
+                                      │
+                                      ◆
+                                     ╱ ╲ (Composition)
+                                     │
+                              ╔════════════════╗
+                              ║     Cart       ║
+                              ╠════════════════╣
+                              ║-customerID: int║
+                              ║-address: String║
+                              ║-cart: Cart     ║
+                              ╠════════════════╣
+                              ║+signup(): void ║
+                              ║+viewProducts():void
+                              ║+addToCart(p: Product)
+                              ║+placeOrder(): Order
+                              ╚════════════════╝
+                                      │
+                                      ◆──────────────────────┐
+                                     ╱ ╲ (Composition)       │
+                                     │                       │
+                          ╔════════════════╗      ╔════════════════╗
+                          ║     Order      ║      ║    Product     ║
+                          ╠════════════════╣      ╠════════════════╣
+                          ║-orderID: int   ║      ║-productId: int ║
+                          ║-products: List ║      ║-name: String   ║
+                          ║-totalAmount:   ║      ║-price: double  ║
+                          ║  double        ║      ║-stock: int     ║
+                          ╠════════════════╣      ╠════════════════╣
+                          ║+placeOrder():  ║      ║+display(): void║
+                          ║  void          ║      ║+updatePrice(): void
+                          ║+cancelOrder(): ║      ║                ║
+                          ║  void          ║      ╚════════════════╝
+                          ╚════════════════╝              △
+                                                          │
+                                        ┌─────────────────┼─────────────────┐
+                                        │                 │                 │
+                                        ▽                 ▽                 ▽
+                                   ╔═══════════╗    ╔═══════════╗    ╔═══════════════╗
+                                   ║  Grocery  ║    ║  Clothes  ║    ║  Electronics  ║
+                                   ╠═══════════╣    ╠═══════════╣    ╠═══════════════╣
+                                   ║-expiry    ║    ║-size      ║    ║-warranty: int ║
+                                   ║  Date     ║    ║-brand     ║    ║-brand: String ║
+                                   ║-weight    ║    ║-stuff     ║    ║-power: String ║
+                                   ║-brand     ║    ║-color     ║    ║               ║
+                                   ╠═══════════╣    ╠═══════════╣    ╠═══════════════╣
+                                   ║+Grocery() ║    ║+Clothes() ║    ║+Electronics() ║
+                                   ║+Grocery() ║    ║+Clothes() ║    ║+Electronics() ║
+                                   ║+getExpiry ║    ║+getSize() ║    ║+getWarranty() ║
+                                   ║  Date()   ║    ║+getBrand()║    ║+getBrand()    ║
+                                   ║+setWeight ║    ║+getColor()║    ║+getPower()    ║
+                                   ║+setBrand()║    ║+setColor()║    ║+setPower()    ║
+                                   ╚═══════════╝    ╚═══════════╝    ╚═══════════════╝
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+                                          LEGEND & RELATIONSHIP TYPES
+
+
+  ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+  ◇ (Empty Diamond) = Aggregation (Weak Association)
+     • "has-a" relationship with sharing
+     • Child can exist independently
+     • Example: Cart has CartItems (items can be reused)
+
+  ◆ (Filled Diamond) = Composition (Strong Association)
+     • "has-a" relationship with ownership
+     • Child depends on parent for existence
+     • Example: User has Address (address only exists for that user)
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  △ = Inheritance (Extends/Implements)
+     • Child "is-a" Parent
+     • Examples:
+       - Customer extends User
+       - Admin extends User
+       - Order extends Cart
+       - Clothes extends Product
+       - Grocery extends Product
+       - Electronics extends Product
+
+  ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+
+                                        RELATIONSHIP DESCRIPTORS
+
+
+  ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │                                                                                                 │
+  │  User ──────◆────── Address        (Composition: User has-an Address)                          │
+  │                                                                                                 │
+  │  Customer ──┼── User (Inheritance)   (Customer is-a User)                                      │
+  │             └──◆────── Address       (Composition through inheritance)                         │
+  │                                                                                                 │
+  │  Admin ────┼── User (Inheritance)     (Admin is-a User)                                        │
+  │            └──◆────── Address        (Composition through inheritance)                         │
+  │                                                                                                 │
+  │  Cart ───◆───CartItem               (Composition: Cart has CartItems)                          │
+  │          └──◇───Product              (Aggregation: CartItem references Product)               │
+  │                                                                                                 │
+  │  Order ──┼── Cart (Inheritance)       (Order is-a Cart)                                        │
+  │                                                                                                 │
+  │  Product ◄─ Clothes (Inheritance)    (Clothes is-a Product)                                   │
+  │         ◄─ Grocery (Inheritance)     (Grocery is-a Product)                                    │
+  │         ◄─ Electronics (Inheritance) (Electronics is-a Product)                                │
+  │                                                                                                 │
+  └─────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
