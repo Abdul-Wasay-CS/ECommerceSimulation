@@ -11,8 +11,8 @@ public class Main {
                     ║    Menu :                                                    ║
                     ║    1. Login as Admin                                         ║
                     ║    2. Login as Customer                                      ║
-                    ║    3. SignUp as Customer                                     ║
-                    ║    4. SignUp as Admin                                        ║
+                    ║    3. SignUp as Admin                                        ║
+                    ║    4. SignUp as Customer                                     ║
                     ║    5. Exit                                                   ║
                     ╚══════════════════════════════════════════════════════════════╝
                     """ + Color.Reset());
