@@ -3,8 +3,6 @@ package pakMart.frontEnd;
 import java.awt.*;
 import javax.swing.*;
 
-import pakMart.frontEnd.CustomColors;
-
 // For Displaying the Main menu buttons , display format is in grid  layout
 
 public class MainMenu extends JFrame {
@@ -14,27 +12,29 @@ public class MainMenu extends JFrame {
     JButton customerLoginBtn;
     JButton adminSignupBtn;
     JButton customerSignupBtn;
+    JButton exitBtn;
 
     public MainMenu() {
 
         // main panel border consants.
         final int MP_TOP_SPACE = 10;
         final int MP_BOTTOM_SPACE = 10;
-        final int MP_LEFT_SPACE= 10;
-        final int MP_RIGT_SPACE = 10;
+        final int MP_LEFT_SPACE = 10;
+        final int MP_RIGHT_SPACE = 10;
 
         mainPanel = new JPanel(new GridLayout(3, 2, 3, 3));
         adminLoginBtn = new JButton("Login as Admin");
         customerLoginBtn = new JButton("Login as Customer");
         adminSignupBtn = new JButton("SignUp as Admin");
         customerSignupBtn = new JButton("SignUp as Customer");
+        exitBtn = new JButton("Exit");
 
         // Setting the properties of the buttons
         adminLoginBtn.setBackground(CustomColors.SILVER);
         adminLoginBtn.setForeground(CustomColors.BLACK);
         adminLoginBtn.setFont(new Font("Arial", Font.BOLD, 16));
         adminLoginBtn.setPreferredSize(new Dimension(200, 50));
-        
+
         customerLoginBtn.setBackground(CustomColors.SILVER);
         customerLoginBtn.setForeground(CustomColors.BLACK);
         customerLoginBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -50,6 +50,11 @@ public class MainMenu extends JFrame {
         customerSignupBtn.setFont(new Font("Arial", Font.BOLD, 16));
         customerSignupBtn.setPreferredSize(new Dimension(200, 50));
 
+        exitBtn.setBackground(CustomColors.SILVER);
+        exitBtn.setForeground(CustomColors.BLACK);
+        exitBtn.setFont(new Font("Arial", Font.BOLD, 16));
+        exitBtn.setPreferredSize(new Dimension(200, 50));
+
         // Adding the buttons to the main panel
         mainPanel.add(adminLoginBtn);
         mainPanel.add(customerLoginBtn);
@@ -59,8 +64,8 @@ public class MainMenu extends JFrame {
         // Setting the properties of the main panel
         mainPanel.setBackground(CustomColors.NAVY_BLUE);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(
-                                        MP_TOP_SPACE, MP_LEFT_SPACE, 
-                                        MP_BOTTOM_SPACE, MP_RIGT_SPACE));
+                MP_TOP_SPACE, MP_LEFT_SPACE,
+                MP_BOTTOM_SPACE, MP_RIGHT_SPACE));
         // Adding the main panel to the frame
         this.add(mainPanel);
 
@@ -72,11 +77,10 @@ public class MainMenu extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            mainMenu.setLocationRelativeTo(null); // Center the frame on the screen
-            mainMenu.setVisible(true);
-        });
+
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainMenu.setLocationRelativeTo(null); // Center the frame on the screen
+        mainMenu.setVisible(true);
     }
 }

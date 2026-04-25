@@ -303,7 +303,7 @@ public class Admin extends User {
         System.out.println("pakMart.Admin ID: " + adminId);
 
         // Save to file
-        if (FileManager.saveAdminData(this)) {
+        if (AdminFileManager.saveData(this)) {
             System.out.println("Admin data saved successfully.");
         } else {
             System.out.println("Failed to save admin data.");
@@ -314,7 +314,7 @@ public class Admin extends User {
     public void login(String username, String password) {
 
         // At this point the current object doesn't have loaded data
-        Admin loadedAdmin = FileManager.loadAdmin(username, password);
+        Admin loadedAdmin = AdminFileManager.load(username, password);
 
         if (loadedAdmin != null) {
             if (username.equals(loadedAdmin.getUserName()) && password.equals(loadedAdmin.getPassword())) {
@@ -386,7 +386,7 @@ public class Admin extends User {
     }
 
     public static boolean exists(String username, String password) {
-        if (FileManager.findAdmin(username, password)) {
+        if (AdminFileManager.find(username, password)) {
             System.out.println("Admin found!");
             return true;
         } else {
