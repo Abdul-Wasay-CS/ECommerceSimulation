@@ -22,6 +22,7 @@ public class MainMenu extends JFrame {
         final int MP_LEFT_SPACE = 10;
         final int MP_RIGHT_SPACE = 10;
 
+        // Initializing the main panel and buttons
         mainPanel = new JPanel(new GridLayout(3, 2, 3, 3));
         adminLoginBtn = new JButton("Login as Admin");
         customerLoginBtn = new JButton("Login as Customer");
@@ -66,6 +67,7 @@ public class MainMenu extends JFrame {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(
                 MP_TOP_SPACE, MP_LEFT_SPACE,
                 MP_BOTTOM_SPACE, MP_RIGHT_SPACE));
+
         // Adding the main panel to the frame
         this.add(mainPanel);
 
@@ -76,11 +78,16 @@ public class MainMenu extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainMenu.setLocationRelativeTo(null); // Center the frame on the screen
-        mainMenu.setVisible(true);
-    }
+    // Main method to test the MainMenu class
+    // Uncomment to test the MainMenu class independently
+  
+    /*
+     * public static void main(String[] args) {
+     * 
+     * MainMenu mainMenu = new MainMenu();
+     * mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     * mainMenu.setLocationRelativeTo(null); // Center the frame on the screen
+     * mainMenu.setVisible(true);
+     * }
+     */
 }

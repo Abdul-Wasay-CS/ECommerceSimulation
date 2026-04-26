@@ -2,7 +2,7 @@ package pakMart;
 
 import java.io.*;
 
-public class FileManager {
+public abstract class FileManager {
     
     // Constants for CSV column indices
 
